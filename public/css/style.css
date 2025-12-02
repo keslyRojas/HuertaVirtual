@@ -1,0 +1,97 @@
+:root {
+    --clr-green: hsl(79, 44%, 50%);
+    --clr-beige-background: hsl(47, 70%, 87%);
+    --clr-beige-dark-background: hsl(46, 54%, 85%);
+    --clr-input-border: hsl(21, 43%, 48%);
+    --clr-white: hsl(0, 0%, 100%);
+    --color-text: hsl(0, 0%, 20%);
+}
+
+body {
+    background-color: var(--clr-beige-background);
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    color: var(--color-text);
+}
+
+.nav-bar {
+    background-color: var(--clr-green);
+    height: 100px;
+    margin-bottom: 25px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.57);
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.login-container {
+    padding-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    background-color: var(--clr-beige-dark-background);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.fruits-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--clr-input-border);
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+.fruits-icon img {
+    width: 80%;
+    object-fit: cover;
+    display: block;
+}
+
+.form-group label {
+    text-align: start;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: var(--color-text);
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--clr-input-border);
+    border-radius: 9px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+}
+
+.button {
+    background-color: var(--clr-green);
+    color: var(--clr-white);
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.button:hover {
+    background-color: #50663a;
+}
