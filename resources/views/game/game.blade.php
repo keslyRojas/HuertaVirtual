@@ -10,12 +10,16 @@
 <body>
 
 
-    <div class="top-bar">
-        
-        <div class="coins-box">
-            <img src="/img/coin.png" class="coin">
-            <img src="/img/coin.png" class="coin coin2">
-        </div>
+   <div class="top-bar">
+
+ 
+    <div class="coins-box">
+        <img src="/img/coin.png" class="coin">
+        <img src="/img/coin.png" class="coin coin2">
+    </div>
+
+
+    <div class="right-side">
 
         <div class="top-icons">
             <button class="icon-btn">
@@ -23,12 +27,22 @@
             </button>
 
             <button class="icon-btn">
-                <img src="/img/stats.png" class="icon-img">
+                <img src="/img/store.png" class="icon-img">
             </button>
+        </div>
+
+        <div class="user-card">
+            <img src="/img/user.png" class="user-icon">
+            <div class="user-info">
+                <p><strong>Usuario:</strong> Invitado</p>
+                <p><strong>Semillas disponibles:</strong> 0</p>
+                <p><strong>Productos cosechados:</strong> 0</p>
+            </div>
         </div>
 
     </div>
 
+</div>
 
     <div class="main-box">
         <div class="inner-box"></div>
