@@ -95,3 +95,28 @@ body {
 .button:hover {
     background-color: #50663a;
 }
+
+.alert-box {
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.alert-box.error {
+    background-color: #f8d7da;
+    border-left: 5px solid #c53030;
+    color: #721c24;
+}
+
+.alert-box.success {
+    background-color: #d4edda;
+    border-left: 5px solid #2f855a;
+    color: #155724;
+}
+
+.alert-box ul {
+    padding-left: 15px;
+    margin: 0;
+}

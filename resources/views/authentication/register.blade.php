@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Iniciar Sesión - Huerta</title>
+    <title>Crear Cuenta - Huerta</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -28,17 +28,32 @@
                 <div class="fruits-icon">
                     <img src="{{ asset('img/icon.png') }}" alt="Icono" class="fruit-icons">
                 </div>
-                 <h2 class="title">Iniciar Sesión</h2>
-                   @if(session('error'))
-                <div class="alert-box error">
-                    {{ session('error') }}
-                </div>
-                @endif
-
+                <h2 class="title">Crear Cuenta</h2>
             </div>
 
-            <form method="POST" action="{{ route('login.submit') }}">
+            @if ($errors->any())
+                <div class="alert-box error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if(session('success'))
+                <div class="alert-box success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('register.submit') }}">
                 @csrf
+
+                <div class="form-group">
+                    <label for="username">Nombre:</label>
+                    <input id="username" type="text" name="username" required>
+                </div>
 
                 <div class="form-group">
                     <label for="email">Correo:</label>
@@ -50,18 +65,17 @@
                     <input id="password" type="password" name="password" required>
                 </div>
 
-                <button class="button">Ingresar</button>
+                <button class="button">Registrarse</button>
             </form>
 
             <p style="margin-top:20px;">
-                ¿No tenés cuenta?
-                <a href="{{ route('register') }}" style="color: var(--clr-green); font-weight:bold;">
-                    Crear cuenta
+                ¿Ya tenés cuenta?
+                <a href="{{ route('login') }}" style="color: var(--clr-green); font-weight:bold;">
+                    Iniciar sesión
                 </a>
             </p>
 
         </div>
     </div>
 
-</body>
-</html>
+</body
