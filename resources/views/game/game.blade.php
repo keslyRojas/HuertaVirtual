@@ -15,7 +15,7 @@
  
     <div class="coins-box">
         <img src="/img/coin.png" class="coin">
-        <img src="/img/coin.png" class="coin coin2">
+        <img src="" class="coin coin2">
     </div>
 
 
