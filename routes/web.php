@@ -4,11 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\GardenController;
 
+// ===================================
+// Página de inicio
+// ===================================
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Rutas de autenticación
+// ===================================
+// Autenticación
+// ===================================
 Route::get('/register', [AuthenticationController::class, 'showRegister'])
     ->name('register');
 
@@ -24,17 +29,23 @@ Route::post('/login', [AuthenticationController::class, 'login'])
 Route::post('/logout', [AuthenticationController::class, 'logout'])
     ->name('logout');
 
-// Ruta del huerto 
-Route::get('/garden', function () {
-    return view('garden.garden');
+// ===================================
+// Vista del huerto (FRONTEND BLADE)
+// ===================================
+Route::get('/garden', [GardenController::class, 'index'])->name('garden');
 
+
+// ===================================
+// Acciones del huerto (PLANTAR / REGAR / COSECHAR)
+// ===================================
 Route::post('/garden/plant', [GardenController::class, 'plant'])
-->name('garden.plant');
-Route::post('/garden/water', [GardenController::class, 'water'])
-->name('garden.water');
-Route::post('/garden/harvest', [GardenController::class, 'harvest'])
-->name('garden.harvest');
-Route::get('/garden/status/{plot_id}', [GardenController::class, 'status'])
-->name('garden.status');
+    ->name('garden.plant');
 
-});
+Route::post('/garden/water', [GardenController::class, 'water'])
+    ->name('garden.water');
+
+Route::post('/garden/harvest', [GardenController::class, 'harvest'])
+    ->name('garden.harvest');
+
+Route::get('/garden/status/{plot_id}', [GardenController::class, 'status'])
+    ->name('garden.status');

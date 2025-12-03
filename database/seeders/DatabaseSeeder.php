@@ -26,14 +26,14 @@ class DatabaseSeeder extends Seeder
             //TransactionTypeSeeder::class,
             //UsersWithWalletsSeeder::class,
 
-            //GardenPlotSeeder::class,
+            GardenPlotSeeder::class,
 
             //InventoryItemCategorySeeder::class,
             //InventoryItemSeeder::class,
 
             //NotificationTypeSeeder::class,
 
-            //PlantSeeder::class,
+            PlantSeeder::class,
 
             //MissionStatusSeeder::class,
 

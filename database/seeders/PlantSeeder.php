@@ -17,7 +17,6 @@ class PlantSeeder extends Seeder
         //
         $plants = [
             [
-                'id' => 1,
                 'name' => 'Strawberry',
                 'description' => 'A fruit-bearing plant cultivated as an herbaceous perennial, typically grown in loose, well-draining soil with a moderate watering schedule.',
                 'growth_hours' => 6,          // tiempo de crecimiento en horas
@@ -26,7 +25,6 @@ class PlantSeeder extends Seeder
                 'price' => 5,                   // precio de la planta
             ],
             [
-                'id' => 2,
                 'name' => 'Carrot',
                 'description' => 'A root crop with a medium-to-long growth cycle, best suited for loose soil and moderate watering.',
                 'growth_hours' => 4,        // tiempo de crecimiento en horas

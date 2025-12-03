@@ -16,7 +16,7 @@ class AuthenticationController extends Controller
     }
 
 
-    public function register(Request $request)
+ public function register(Request $request)
 {
     $validated = $request->validate([
         'username' => 'required|min:3',
@@ -32,11 +32,19 @@ class AuthenticationController extends Controller
         'password.min'      => 'La contraseña debe tener al menos 6 caracteres.',
     ]);
 
-    User::create([
+    $user = User::create([
         'name'     => $validated['username'],
         'email'    => $validated['email'],
         'password' => Hash::make($validated['password']),
     ]);
+
+    for ($i = 1; $i <= 2; $i++) {
+        \App\Models\GardenPlot::create([
+            'user_id'     => $user->id,
+            'plot_number' => $i,
+            'status'      => 'E'
+        ]);
+    }
 
     return redirect('/login')->with('success', 'Cuenta creada con éxito. Ahora iniciá sesión.');
 }

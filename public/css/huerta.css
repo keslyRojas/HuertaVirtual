@@ -96,6 +96,7 @@ body {
     height: 300px;
     background: #783800;
     border-radius: 20px;
+    pointer-events: auto !important;
 }
 
 .action-buttons {
@@ -207,4 +208,10 @@ body {
     border: none;
     border-radius: 8px;
     margin-top: 20px;
+}
+
+.plot {
+    cursor: pointer;
+    position: relative;
+    z-index: 20;
 }
