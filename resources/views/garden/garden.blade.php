@@ -34,7 +34,7 @@
         <div class="user-card">
             <img src="/img/user.png" class="user-icon">
             <div class="user-info">
-                <p><strong>Usuario:</strong> Invitado</p>
+                <p><strong>Usuario:</strong></p>
                 <p><strong>Semillas disponibles:</strong> 0</p>
                 <p><strong>Productos cosechados:</strong> 0</p>
             </div>
@@ -69,6 +69,18 @@
         </button>
 
     </div>
+
+    <div id="seedSelector" class="seed-modal hidden">
+    <div class="seed-content">
+        <h2>Selecciona una semilla</h2>
+
+        <div id="seedGrid" class="seed-grid">
+            <!-- JS insertará las plantas aquí -->
+        </div>
+
+        <button id="closeSeedSelector" class="close-btn">Cerrar</button>
+    </div>
+</div>
 
 </body>
 </html>

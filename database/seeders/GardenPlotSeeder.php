@@ -25,15 +25,19 @@ class GardenPlotSeeder extends Seeder
         }
 
         foreach ($users as $user) {
-            // Crea una parcela básica por usuario
+            
+            for($i = 1; $i <= 8; $i++){
             GardenPlot::firstOrCreate(
-                ['user_id' => $user->id],
+                ['user_id' => $user->id, 
+                'plot_number' => $i,
+            ],
                 [
-                    'status' => '1', // 0 - unlocked, 1 - locked
+                    'status' => '0', // 0 - unlocked, 1 - locked
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]
             );
         }
-    }
+     }
+  }
 }
