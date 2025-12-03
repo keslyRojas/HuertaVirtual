@@ -59,6 +59,7 @@ class AuthenticationController extends Controller
         return redirect('/login')->with('error', 'Correo o contraseña incorrectos.');
     }
 
+    
     public function showLogin()
     {
         return view('authentication.login');
