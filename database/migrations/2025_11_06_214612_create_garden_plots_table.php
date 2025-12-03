@@ -54,6 +54,10 @@ return new class extends Migration
             // Alternative: Could reference a plot_statuses lookup table instead
             // nullable() because new plots might not have a status set initially
             $table->char('status', 1)->nullable();
+            // Plot number: Identifies specific plot for the user
+            // Allows users to have multiple distinct plots
+            $table->unsignedInteger('plot_number');
+
             
             // Standard timestamps for tracking plot creation/updates
             $table->timestamps();

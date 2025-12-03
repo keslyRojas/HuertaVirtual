@@ -17,45 +17,23 @@ class PlantSeeder extends Seeder
         //
         $plants = [
             [
-                'name' => 'Tomato',
-                'description' => 'A versatile mid-cycle crop that grows faster with regular watering and vertical support.',
-                'growth_hours' => 48,          // tiempo de crecimiento en horas
+                'id' => 1,
+                'name' => 'Strawberry',
+                'description' => 'A fruit-bearing plant cultivated as an herbaceous perennial, typically grown in loose, well-draining soil with a moderate watering schedule.',
+                'growth_hours' => 6,          // tiempo de crecimiento en horas
                 'water_need_per_day' => 2,     // cantidad de riegos por día
                 'fertilizer_effect' => 10,     // porcentaje de efecto del fertilizante
-                'price' => 30,
+                'price' => 5,                   // precio de la planta
             ],
             [
+                'id' => 2,
                 'name' => 'Carrot',
                 'description' => 'A root crop with a medium-to-long growth cycle, best suited for loose soil and moderate watering.',
-                'growth_hours' => 72,
-                'water_need_per_day' => 1,
-                'fertilizer_effect' => 15,
-                'price' => 25,
-            ],
-            [
-                'name' => 'Onion',
-                'description' => 'A hardy bulb with slow growth that tolerates slight variations in watering and temperature.',
-                'growth_hours' => 96,
-                'water_need_per_day' => 1,
-                'fertilizer_effect' => 12,
-                'price' => 28,
-            ],
-            [
-                'name' => 'Potato',
-                'description' => 'A tuber crop with a long growth cycle, requiring consistent watering and benefiting greatly from fertilization.',
-                'growth_hours' => 120,
-                'water_need_per_day' => 2,
-                'fertilizer_effect' => 20,
-                'price' => 35,
-            ],
-            [
-                'name' => 'Lettuce',
-                'description' => 'A fast-growing leafy vegetable that thrives with frequent watering and light fertilization.',
-                'growth_hours' => 36,
-                'water_need_per_day' => 2,
-                'fertilizer_effect' => 8,
-                'price' => 20,
-            ],
+                'growth_hours' => 4,        // tiempo de crecimiento en horas
+                'water_need_per_day' => 1,  // cantidad de riegos por día
+                'fertilizer_effect' => 15,  // porcentaje de efecto del fertilizante
+                'price' =>3,                 // precio de la planta
+            ]
         ];
 
         foreach ($plants as $plant) {
