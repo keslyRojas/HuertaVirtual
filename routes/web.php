@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\GardenController;
+use App\Http\Controllers\InventoryController;
 
 
 Route::get('/', function () {
@@ -46,3 +47,7 @@ Route::post('/garden/harvest', [GardenController::class, 'harvest'])
 
 Route::get('/garden/status/{plot_id}', [GardenController::class, 'status'])
     ->name('garden.status');
+
+// Rutas para el inventario
+Route::get('/inventory', [InventoryController::class, 'index'])
+    ->name('inventory.index');

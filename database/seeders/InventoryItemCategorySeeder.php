@@ -15,6 +15,9 @@ class InventoryItemCategorySeeder extends Seeder
             ['name' => 'Technology & Automation'],
             ['name' => 'Improved & Special Seeds'], 
             ['name' => 'Infrastructure & Utility Upgrades'],
+            ['name' => 'Seeds'],
+            ['name' => 'Products'],
+            ['name' => 'Fertilizer']
         ];
 
         foreach ($categories as $category) {

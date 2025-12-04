@@ -45,6 +45,8 @@
         <div class="top-icons">
             <button class="icon-btn"><img src="{{ asset('img/bell.png') }}" class="icon-img"></button>
             <button class="icon-btn"><img src="{{ asset('img/store.png') }}" class="icon-img"></button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inventoryModal">Inventario</button>
+
         </div>
 
         <div class="user-card">
@@ -188,6 +190,55 @@
         document.getElementById('seedModal').classList.add('hidden');
     }
 </script>
+
+
+<!-- Modal de Inventario -->
+ <div class="modal-zone" id="inventory-modal-zone">
+
+ 
+<style>
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+</style>
+
+<div class="modal fade" id="inventoryModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Inventario del Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="inventoryContent">
+        Cargando inventario...
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$('#inventoryModal').on('show.bs.modal', function () {
+
+    $.ajax({
+        url: "{{ route('inventory.index') }}",
+        type: 'GET',
+        success: function(data) {
+            $('#inventoryContent').html(data);
+        },
+        error: function() {
+            $('#inventoryContent').html('<p>Error al cargar el inventario.</p>');
+        }
+    });
+
+});
+</script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -45,7 +45,7 @@ class InventoryItemSeeder extends Seeder
 
         foreach ($items as $item) {
             if (!isset($categories[$item['category']])) {
-                throw new \Exception("❌ Categoría NO encontrada: " . $item['category']);
+                throw new \Exception("Categoría NO encontrada: " . $item['category']);
             }
 
             InventoryItem::firstOrCreate([

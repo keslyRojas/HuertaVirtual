@@ -217,3 +217,19 @@ body {
     border-radius: 8px;
     margin-top: 20px;
 }
+.table {
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.table th {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+.table td, .table th {
+    padding: 10px;
+}
+
+
+

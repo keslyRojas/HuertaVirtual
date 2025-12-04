@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 
             InventoryItemCategorySeeder::class,
             InventoryItemSeeder::class,
-            UsersStartWithSeedsSeeder::class,
+           //UsersStartWithSeedsSeeder::class,
 
 
             //NotificationTypeSeeder::class,
@@ -35,6 +35,11 @@ class DatabaseSeeder extends Seeder
 
 
             PlantedCropStatusSeeder::class,
+
+           
+            BasicGardenInventorySeeder::class,
+            UserBasicInventorySeeder::class,
+
 
             //MissionStatusSeeder::class,
             //MissionSeeder::class,
