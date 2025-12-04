@@ -2,41 +2,31 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\WalletTransaction;
 use App\Models\TransactionType;
-
 use Illuminate\Database\Seeder;
 
 class UsersWithWalletsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
-         $types = TransactionType::pluck('id', 'transaction');
-        // 10 usuarios base
+        $types = TransactionType::pluck('id', 'transaction');
+
         $names = [
             'maria.rojas', 'carlos.soto', 'ana.martinez', 'diego.vargas', 'laura.mora',
             'pablo.lopez', 'sofia.gomez', 'ricardo.mendez', 'valeria.diaz', 'andres.romero'
         ];
 
-        foreach ($names as $i => $uname) {
+        foreach ($names as $uname) {
             DB::transaction(function () use ($uname, $types) {
-                $email = $uname.'@example.com';
 
                 $user = User::create([
-                    'email'    => $email,
-                    'name' => $uname,
+                    'email'    => $uname.'@example.com',
+                    'name'     => $uname,
                     'password' => Hash::make('password123'),
                 ]);
 
@@ -45,25 +35,14 @@ class UsersWithWalletsSeeder extends Seeder
                     'balance' => 10,
                 ]);
 
-                // 5 transacciones por usuario
-                // Montos sugeridos y signo según tipo (earn suma, spend resta)
-                $candidates = [
-                    ['key' => 6, 'amount' => 10, 'event' => 'Registration'],
-                    ['key' => 6, 'amount' => 10,  'event' => 'Registration'],
-                    ['key' => 6, 'amount' => 10,  'event' => 'Registration'],
-                    ['key' => 6, 'amount' => 10,  'event' => 'Registration'],
-                    ['key' => 6, 'amount' => 10,  'event' => 'Registration'],
-                ];
-
-                foreach ($candidates as $tx) {
-                    
+              
+                for ($i = 0; $i < 5; $i++) {
                     WalletTransaction::create([
-                        'wallet_id'           => $wallet->id,
-                        'transaction_types_id' => $tx['key'],
-                        'amount'              => $tx['amount'],  // siempre positivo en la tabla
-                        'event'               => $tx['event'],
+                        'wallet_id'            => $wallet->id,
+                        'transaction_types_id' => $types['Deposit'], 
+                        'amount'               => 10,
+                        'event'                => 'Registration',
                     ]);
-
                 }
 
                 $wallet->save();

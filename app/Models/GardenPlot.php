@@ -9,6 +9,6 @@ class GardenPlot extends Model
     protected $fillable = [
         'user_id',
         'plot_number',
-        'status'
+        'status',
     ];
 }

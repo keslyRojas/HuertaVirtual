@@ -11,10 +11,6 @@
 
 <body>
 
-
-<!-- ==============================
-     MODAL DE SELECCIÓN DE SEMILLA
-============================== -->
 <div id="seedModal" class="seed-modal hidden">
     <div class="seed-box">
         <h2>Selecciona una semilla</h2>
@@ -32,15 +28,18 @@
     </div>
 </div>
 
-<!-- ==============================
-     TOP BAR
-============================== -->
+
 <div class="top-bar">
 
     <div class="coins-box">
+    <div class="coins-stack">
         <img src="{{ asset('img/coin.png') }}" class="coin">
         <img src="" class="coin coin2">
     </div>
+        <span class="coin-amount">{{ $coins }}</span>
+    </div>
+
+
 
     <div class="right-side">
         <div class="top-icons">
@@ -52,17 +51,15 @@
             <img src="{{ asset('img/user.png') }}" class="user-icon">
             <div class="user-info">
                 <p><strong>Usuario:</strong> {{ Auth::user()->name }}</p>
-                <p><strong>Semillas disponibles:</strong> 0</p>
-                <p><strong>Productos cosechados:</strong> 0</p>
+                <p><strong>Semillas disponibles:</strong> {{ $seeds }}</p>
+                <p><strong>Productos cosechados:</strong> {{ $harvestedCount }}</p>
             </div>
         </div>
     </div>
 
 </div>
 
-<!-- ==============================
-     ALERTAS
-============================== -->
+
 @if(session('success'))
 <div class="alert-success">{{ session('success') }}</div>
 @endif
@@ -71,18 +68,29 @@
 <div class="alert-error">{{ session('error') }}</div>
 @endif
 
-<!-- ==============================
-     PARRCELAS
-============================== -->
+
 <div class="main-box">
     @foreach($plots as $plot)
-        <div class="inner-box plot" data-id="{{ $plot->id }}"></div>
+        <div class="inner-box plot" data-id="{{ $plot->id }}">
+
+            @php
+                $crop = \App\Models\PlantedCrop::where('garden_plots_id', $plot->id)
+                        ->whereNull('harvested_at')
+                        ->first();
+            @endphp
+
+            @if($crop)
+                <img src="{{ asset('img/crops/' . strtolower($crop->plant->name) . '_stage' . $crop->growth_stage . '.png') }}"
+                     class="crop-img">
+            @else
+                <img src="{{ asset('img/crops/empty.png') }}" class="crop-img">
+            @endif
+
+        </div>
     @endforeach
 </div>
 
-<!-- ==============================
-     BOTONES DE ACCIÓN
-============================== -->
+
 <div class="action-buttons">
 
     <!-- SEMBRAR -->
@@ -96,7 +104,7 @@
     </button>
 
     <!-- FERTILIZAR -->
-    <button class="img-btn" onclick="alert('Fertilizar no implementado aún');">
+    <button class="img-btn" onclick="submitAction('fertilize')">
         <img src="{{ asset('img/fertilizer-btn.png') }}" alt="Abonar">
     </button>
 
@@ -107,36 +115,33 @@
 
 </div>
 
-<!-- ==============================
-     FORMULARIOS INVISIBLES
-============================== -->
 
-<!-- Sembrar -->
 <form id="formPlant" method="POST" action="{{ route('garden.plant') }}" class="hidden-form">
     @csrf
     <input type="hidden" name="garden_plot_id" id="plotPlant">
     <input type="hidden" name="plant_id" id="plantId">
 </form>
 
-<!-- Regar -->
 <form id="formWater" method="POST" action="{{ route('garden.water') }}" class="hidden-form">
     @csrf
     <input type="hidden" name="garden_plot_id" id="plotWater">
 </form>
 
-<!-- Cosechar -->
+<form id="formFertilize" method="POST" action="{{ route('garden.fertilize') }}" class="hidden-form">
+    @csrf
+    <input type="hidden" name="garden_plot_id" id="plotFertilize">
+</form>
+
 <form id="formHarvest" method="POST" action="{{ route('garden.harvest') }}" class="hidden-form">
     @csrf
     <input type="hidden" name="garden_plot_id" id="plotHarvest">
 </form>
 
-<!-- ==============================
-     JAVASCRIPT
-============================== -->
+
+
 <script>
     let selectedPlot = null;
 
-    // Seleccionar parcela
     document.querySelectorAll('.plot').forEach(plot => {
         plot.addEventListener('click', () => {
             selectedPlot = plot.getAttribute('data-id');
@@ -146,40 +151,39 @@
         });
     });
 
-    // Acciones
     function submitAction(action) {
         if (!selectedPlot) {
             alert("Selecciona una parcela primero.");
             return;
         }
 
-        // ABRIR EL MODAL DE SEMILLAS
         if (action === "seed") {
             document.getElementById('seedModal').classList.remove('hidden');
             return;
         }
 
-        // REGAR
         if (action === "water") {
             document.getElementById("plotWater").value = selectedPlot;
             document.getElementById("formWater").submit();
         }
 
-        // COSECHAR
+        if (action === "fertilize") {
+            document.getElementById("plotFertilize").value = selectedPlot;
+            document.getElementById("formFertilize").submit();
+        }
+
         if (action === "harvest") {
             document.getElementById("plotHarvest").value = selectedPlot;
             document.getElementById("formHarvest").submit();
         }
     }
 
-    // Seleccionar semilla y sembrar
     function selectSeed(seedId) {
         document.getElementById("plotPlant").value = selectedPlot;
         document.getElementById("plantId").value = seedId;
         document.getElementById("formPlant").submit();
     }
 
-    // Cerrar modal
     function closeSeedModal() {
         document.getElementById('seedModal').classList.add('hidden');
     }

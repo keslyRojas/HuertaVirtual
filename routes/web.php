@@ -4,16 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\GardenController;
 
-// ===================================
-// Página de inicio
-// ===================================
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-// ===================================
-// Autenticación
-// ===================================
+
 Route::get('/register', [AuthenticationController::class, 'showRegister'])
     ->name('register');
 
@@ -29,20 +25,21 @@ Route::post('/login', [AuthenticationController::class, 'login'])
 Route::post('/logout', [AuthenticationController::class, 'logout'])
     ->name('logout');
 
-// ===================================
-// Vista del huerto (FRONTEND BLADE)
-// ===================================
+
 Route::get('/garden', [GardenController::class, 'index'])->name('garden');
 
 
-// ===================================
-// Acciones del huerto (PLANTAR / REGAR / COSECHAR)
-// ===================================
+Route::get('/game', [GardenController::class, 'index'])->name('game');
+
+
 Route::post('/garden/plant', [GardenController::class, 'plant'])
     ->name('garden.plant');
 
 Route::post('/garden/water', [GardenController::class, 'water'])
     ->name('garden.water');
+
+Route::post('/garden/fertilize', [GardenController::class, 'fertilize'])
+    ->name('garden.fertilize');
 
 Route::post('/garden/harvest', [GardenController::class, 'harvest'])
     ->name('garden.harvest');

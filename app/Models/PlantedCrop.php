@@ -17,6 +17,8 @@ class PlantedCrop extends Model
         'last_fertilized_at',
         'harvested_at',
         'sell_to_market',
+        'growth_stage',
+        'growth_boost',
     ];
 
     protected $casts = [
@@ -24,4 +26,14 @@ class PlantedCrop extends Model
         'last_fertilized_at' => 'datetime',
         'harvested_at'       => 'datetime',
     ];
+
+    public function plot()
+    {
+        return $this->belongsTo(GardenPlot::class, 'garden_plots_id');
+    }
+
+    public function plant()
+    {
+        return $this->belongsTo(Plant::class, 'plants_id');
+    }
 }

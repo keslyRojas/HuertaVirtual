@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -16,32 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        /*User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);*/
         $this->call([
-            //TransactionTypeSeeder::class,
-            //UsersWithWalletsSeeder::class,
+            
+          
+            TransactionTypeSeeder::class,
+         
+            UsersWithWalletsSeeder::class,
 
             GardenPlotSeeder::class,
 
-            //InventoryItemCategorySeeder::class,
-            //InventoryItemSeeder::class,
+            InventoryItemCategorySeeder::class,
+            InventoryItemSeeder::class,
+            UsersStartWithSeedsSeeder::class,
+
 
             //NotificationTypeSeeder::class,
 
             PlantSeeder::class,
 
-            //MissionStatusSeeder::class,
 
+            PlantedCropStatusSeeder::class,
+
+            //MissionStatusSeeder::class,
             //MissionSeeder::class,
             //MissionAssignmentStatusSeeder::class,
             //MissionAssignmentSeeder::class,
-            PlantedCropStatusSeeder::class
-            
         ]);
     }
 }
