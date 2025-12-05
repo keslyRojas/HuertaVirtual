@@ -23,28 +23,47 @@ class GardenController extends Controller
 {
     public function index()
     {
-        $plots  = GardenPlot::where('user_id', Auth::id())->get();
-        $plants = Plant::all();
+        $plots = GardenPlot::where('user_id', Auth::id())->get();
+    $plants = Plant::all();
 
-        $seedCategory = InventoryItemCategory::where('name', 'Improved & Special Seeds')->first();
+    // 1. Identificar las categorías de semillas
+    $seedCategoryNames = ['Seeds'];
+    $seedCategoryIds = InventoryItemCategory::whereIn('name', $seedCategoryNames)->pluck('id');
 
-        $seeds = UserInventory::where('user_id', Auth::id())
-            ->whereHas('item', function($q) use ($seedCategory) {
-                $q->where('inventory_item_category_id', $seedCategory->id);
-            })
-            ->sum('quantity');
+    // 2. Calcular el total de semillas para el inventario general
+    $seeds = UserInventory::where('user_id', Auth::id())
+        ->whereHas('item', function($q) use ($seedCategoryIds) {
+            $q->whereIn('inventory_item_category_id', $seedCategoryIds);
+        })
+        ->sum('quantity');
 
-        $harvestedCount = PlantedCrop::whereNotNull('harvested_at')
-            ->whereHas('plot', function ($q) {
-                $q->where('user_id', Auth::id());
-            })
-            ->count();
+    // 3. Obtener las semillas disponibles (cantidad > 0) para el modal de siembra
+    $availableSeeds = UserInventory::where('user_id', Auth::id())
+        ->whereHas('item', function($q) use ($seedCategoryIds) {
+            $q->whereIn('inventory_item_category_id', $seedCategoryIds);
+        })
+        ->where('quantity', '>', 0)
+        ->with('item.plant') // Cargar la relación Plant para obtener el plant_id
+        ->get();
 
-        $coins = Wallet::where('user_id', Auth::id())->value('balance');
+    // Otros datos de la vista
+    $harvestedCount = PlantedCrop::whereNotNull('harvested_at')
+        ->whereHas('plot', function ($q) {
+            $q->where('user_id', Auth::id());
+        })
+        ->count();
 
-        return view('garden.garden', compact(
-            'plots', 'plants', 'seeds', 'harvestedCount', 'coins'
-        ));
+    $coins = Wallet::where('user_id', Auth::id())->value('balance');
+
+    // Devolver la vista
+    return view('garden.garden', compact(
+        'plots', 
+        'plants',
+        'seeds', // Total para la vista lateral
+        'availableSeeds', // Colección para la modal de siembra
+        'harvestedCount', 
+        'coins'
+    ));
     }
 
   
@@ -58,7 +77,7 @@ class GardenController extends Controller
             'inventory_item_id' => $seedItem->id
         ]);
 
-        if ($inventory->quantity <= 1) {
+        if ($inventory->quantity < 1) {
             return back()->with('error', 'No tenés semillas suficientes.');
         }
 

@@ -28,7 +28,7 @@ class MarketController extends Controller
 
         if (!$item) return response()->json(['error' => 'Item no encontrado.'], 404);
 
-        if (!in_array($item->category->name, ['Improved & Special Seeds', 'Fertilizer'])) {
+        if (!in_array($item->category->name, ['Seeds', 'Fertilizer'])) {
             return response()->json(['error' => 'No puedes comprar este item.'], 403);
         }
 

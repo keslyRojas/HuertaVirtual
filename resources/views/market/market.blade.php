@@ -12,7 +12,7 @@
         <td>{{ $item->price }} $</td>
 
         <td>
-            @if(in_array($item->category->name, ['Improved & Special Seeds', 'Fertilizer']))
+            @if(in_array($item->category->name, ['Seeds', 'Fertilizer']))
             <button class="btn btn-success buy-btn" data-id="{{ $item->id }}">Comprar</button>
             @else
             <button class="btn btn-success" disabled>Comprar</button>

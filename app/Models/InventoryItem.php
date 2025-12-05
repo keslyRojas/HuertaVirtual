@@ -10,6 +10,7 @@ class InventoryItem extends Model
         'inventory_item_category_id',
         'name',
         'price',
+        'plant_id',
     ];
 
     public function category()
@@ -21,4 +22,8 @@ class InventoryItem extends Model
 {
     return $this->hasMany(UserInventory::class);
 }
+public function plant()
+    {
+        return $this->belongsTo(Plant::class);
+    }
 }

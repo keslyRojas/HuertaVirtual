@@ -11,6 +11,7 @@
 
 <body>
 
+<!--Modal de semillas-->
 <div id="seedModal" class="seed-modal hidden">
     <div class="seed-box">
         <h2>Selecciona una semilla</h2>
