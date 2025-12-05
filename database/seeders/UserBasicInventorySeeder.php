@@ -12,8 +12,8 @@ class UserBasicInventorySeeder extends Seeder
 {
     public function run(): void
     {
-        // Categorías correctas
-        $seedCat = InventoryItemCategory::where('name', 'Seeds')->first();
+        // Categorías
+        $seedCat = InventoryItemCategory::where('name', 'Improved & Special Seeds')->first();
         $prodCat = InventoryItemCategory::where('name', 'Products')->first();
         $fertCat = InventoryItemCategory::where('name', 'Fertilizer')->first();
 

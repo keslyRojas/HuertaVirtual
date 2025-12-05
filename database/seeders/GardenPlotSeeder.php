@@ -13,7 +13,7 @@ class GardenPlotSeeder extends Seeder
         $users = User::all();
 
         if ($users->isEmpty()) {
-            $this->command->warn("⚠️ No hay usuarios para asignar parcelas.");
+            $this->command->warn("No hay usuarios para asignar parcelas.");
             return;
         }
 

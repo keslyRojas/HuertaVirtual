@@ -58,7 +58,7 @@ class GardenController extends Controller
             'inventory_item_id' => $seedItem->id
         ]);
 
-        if ($inventory->quantity < 1) {
+        if ($inventory->quantity <= 1) {
             return back()->with('error', 'No tenés semillas suficientes.');
         }
 
@@ -121,20 +121,14 @@ class GardenController extends Controller
         ->whereNull('harvested_at')
         ->first();
 
-    if (!$crop) {
-        return back()->with('error', 'No hay planta para cosechar.');
-    }
+    if (!$crop) return back()->with('error', 'No hay planta para cosechar.');
 
     $plant = Plant::find($crop->plants_id);
-
-    if (!$plant) {
-        return back()->with('error', 'Error: la planta no existe en la BD.');
-    }
+    if (!$plant) return back()->with('error', 'Error: la planta no existe en la BD.');
 
     $elapsedMinutes = \Carbon\Carbon::parse($crop->created_at)
         ->diffInMinutes(now(), false); 
     $requiredMinutes = $plant->growth_hours * 60;
-
 
     if ($plant->growth_hours == 0) {
         $elapsedMinutes = $requiredMinutes = 0;
@@ -157,6 +151,16 @@ class GardenController extends Controller
     $wallet = Wallet::firstOrCreate(['user_id' => Auth::id()]);
     $wallet->balance += 5;
     $wallet->save();
+
+    //Incrementa productos cosechados en inventario
+    $item = InventoryItem::where('name', $plant->name)->first();
+    if ($item) {
+        $inventory = UserInventory::firstOrCreate(
+            ['user_id' => Auth::id(), 'inventory_item_id' => $item->id],
+            ['quantity' => 0]
+        );
+        $inventory->increment('quantity');
+    }
 
     return back()->with('success', '¡Cosechado y +5 monedas!');
  }

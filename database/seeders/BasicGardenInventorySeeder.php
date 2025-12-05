@@ -10,12 +10,10 @@ class BasicGardenInventorySeeder extends Seeder
 {
     public function run(): void
     {
-        // Categorías mínimas
-        $seeds = InventoryItemCategory::firstOrCreate(['name' => 'Seeds']);
+        $seeds = InventoryItemCategory::firstOrCreate(['name' => 'Improved & Special Seeds']);
         $products = InventoryItemCategory::firstOrCreate(['name' => 'Products']);
         $fert = InventoryItemCategory::firstOrCreate(['name' => 'Fertilizer']);
 
-        // Items esenciales
         $items = [
             ['category_id' => $seeds->id, 'name' => 'Strawberry Seeds', 'price' => 3],
             ['category_id' => $seeds->id, 'name' => 'Carrot Seeds', 'price' => 3],

@@ -22,7 +22,7 @@ class PlantSeeder extends Seeder
                 'growth_hours' => 0,         
                 'water_need_per_day' => 1,    
                 'fertilizer_effect' => 1,    
-                'price' => 5,                 
+                'price' => 6,                 
             ],
             [
                 'name' => 'Carrot',
@@ -30,7 +30,7 @@ class PlantSeeder extends Seeder
                 'growth_hours' => 0,        
                 'water_need_per_day' => 1,  
                 'fertilizer_effect' => 1,  
-                'price' =>3,                
+                'price' =>6,                
             ]
         ];
 

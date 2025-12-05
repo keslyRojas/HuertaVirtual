@@ -4,13 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\GardenController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\MarketController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
+// Rutas de autenticación
 Route::get('/register', [AuthenticationController::class, 'showRegister'])
     ->name('register');
 
@@ -27,6 +28,7 @@ Route::post('/logout', [AuthenticationController::class, 'logout'])
     ->name('logout');
 
 
+// Rutas para la guerta
 Route::get('/garden', [GardenController::class, 'index'])->name('garden');
 
 
@@ -51,3 +53,8 @@ Route::get('/garden/status/{plot_id}', [GardenController::class, 'status'])
 // Rutas para el inventario
 Route::get('/inventory', [InventoryController::class, 'index'])
     ->name('inventory.index');
+
+// Rutas para el market
+Route::get('/market', [MarketController::class, 'index'])->name('market.index');
+Route::post('/market/buy', [MarketController::class, 'buy'])->name('market.buy');
+Route::post('/market/sell', [MarketController::class, 'sell'])->name('market.sell');

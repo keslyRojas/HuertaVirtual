@@ -33,7 +33,7 @@ class UsersStartWithSeedsSeeder extends Seeder
         ]); 
     } 
     
-    echo "✔️ Usuarios iniciados con 2 semillas.\n"; 
+    echo "Usuarios iniciados con 2 semillas.\n"; 
 } 
 
 }

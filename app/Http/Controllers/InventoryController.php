@@ -14,16 +14,16 @@ class InventoryController extends Controller
     {
       $user = Auth::user();
 
-        // Inventario (semillas y fertilizante)
+        //Inventario (semillas y fertilizante)
         $inventory = UserInventory::with(['item.category'])
             ->where('user_id', $user->id)
             ->get();
 
-        // Buscar plantas por nombre EXACTO
+        // Buscar plantas por nombre
         $carrot = Plant::where('name', 'Carrot')->first();
         $strawberry = Plant::where('name', 'Strawberry')->first();
 
-        // Contar cosechas (si existe la planta)
+        //Contar cosechas (si existe la planta)
         $carrotCount = $carrot
             ? PlantedCrop::where('plants_id', $carrot->id)
                 ->whereNotNull('harvested_at')

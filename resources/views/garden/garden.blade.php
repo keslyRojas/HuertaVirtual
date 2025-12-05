@@ -44,8 +44,8 @@
     <div class="right-side">
         <div class="top-icons">
             <button class="icon-btn"><img src="{{ asset('img/bell.png') }}" class="icon-img"></button>
-            <button class="icon-btn"><img src="{{ asset('img/store.png') }}" class="icon-img"></button>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inventoryModal">Inventario</button>
+            <button class="icon-btn" data-bs-toggle="modal" data-bs-target="#marketModal"><img src="{{ asset('img/store.png') }}" class="icon-img"></button>
+            <button class="icon-btn" data-bs-toggle="modal" data-bs-target="#inventoryModal"><img src="{{ asset('img/inventory.png') }}" class="icon-img"></button>
 
         </div>
 
@@ -95,22 +95,22 @@
 
 <div class="action-buttons">
 
-    <!-- SEMBRAR -->
+    <!-- Sembrar-->
     <button class="img-btn" onclick="submitAction('seed')">
         <img src="{{ asset('img/plant-btn.png') }}">
     </button>
 
-    <!-- REGAR -->
+    <!-- regar -->
     <button class="img-btn" onclick="submitAction('water')">
         <img src="{{ asset('img/water-btn.png') }}" alt="Regar">
     </button>
 
-    <!-- FERTILIZAR -->
+    <!-- Fertilizar -->
     <button class="img-btn" onclick="submitAction('fertilize')">
         <img src="{{ asset('img/fertilizer-btn.png') }}" alt="Abonar">
     </button>
 
-    <!-- COSECHAR -->
+    <!-- Cosechar -->
     <button class="img-btn" onclick="submitAction('harvest')">
         <img src="{{ asset('img/harvest-btn.png') }}" alt="Cosechar">
     </button>
@@ -234,6 +234,42 @@ $('#inventoryModal').on('show.bs.modal', function () {
 
 });
 </script>
+
+<!-- Modal del market -->
+<div class="modal fade" id="marketModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Mercado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body" id="marketContent">
+        Cargando mercado...
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+$('#marketModal').on('show.bs.modal', function () {
+
+    $.ajax({
+        url: "{{ route('market.index') }}",
+        type: 'GET',
+        success: function(data) {
+            $('#marketContent').html(data);
+        },
+        error: function() {
+            $('#marketContent').html('<p>Error al cargar el mercado.</p>');
+        }
+    });
+
+});
+</script>
+
 
 
 
